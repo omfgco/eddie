@@ -1,4 +1,4 @@
-# Eddie Vetter — Trademark Intelligence Engine
+# Eddie (the vetter) — Trademark Intelligence Engine
 
 AI-powered trademark name vetting tool. Enter candidate names, get detailed conflict analysis with scores across 7 dimensions, and download individual PDF reports per name.
 
