@@ -132,18 +132,6 @@ function NameCard({ result, context }) {
               <div style={{ fontSize: 14, lineHeight: 1.8, color: '#c9d1d9', whiteSpace: 'pre-wrap' }}>{result.analysis}</div>
             </div>
           )}
-
-          {result.ownability_suggestions?.length > 0 && (
-            <div>
-              <h4 style={{ fontFamily: 'monospace', fontSize: 10, fontWeight: 800, letterSpacing: 1.8, textTransform: 'uppercase', color: '#8b949e', margin: '0 0 12px' }}>How to Make It More Ownable</h4>
-              {result.ownability_suggestions.map((sg, i) => (
-                <div key={i} style={{ padding: '10px 14px', background: '#0d2818', borderRadius: 6, marginBottom: 6, borderLeft: '3px solid #22c55e' }}>
-                  <div style={{ fontWeight: 700, fontSize: 14, color: '#e6edf3' }}>{sg.suggestion}</div>
-                  <div style={{ fontSize: 13, color: '#8b949e', marginTop: 3, lineHeight: 1.5 }}>{sg.rationale}</div>
-                </div>
-              ))}
-            </div>
-          )}
         </div>
       )}
     </div>
@@ -257,12 +245,12 @@ export default function Home() {
         });
         const data = await res.json();
         if (data.error) {
-          allResults.push({ name: names[i], verdict: 'CAUTION', verdict_summary: `Analysis failed: ${data.error}`, scores: {}, conflicts_found: [], analysis: '', ownability_suggestions: [] });
+          allResults.push({ name: names[i], verdict: 'CAUTION', verdict_summary: `Analysis failed: ${data.error}`, scores: {}, conflicts_found: [], analysis: '' });
         } else if (data.names?.[0]) {
           allResults.push(data.names[0]);
         }
       } catch (err) {
-        allResults.push({ name: names[i], verdict: 'CAUTION', verdict_summary: `Request failed: ${err.message}`, scores: {}, conflicts_found: [], analysis: '', ownability_suggestions: [] });
+        allResults.push({ name: names[i], verdict: 'CAUTION', verdict_summary: `Request failed: ${err.message}`, scores: {}, conflicts_found: [], analysis: '' });
       }
       // Update results incrementally
       setResults([...allResults]);

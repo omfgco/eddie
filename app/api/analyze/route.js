@@ -29,7 +29,6 @@ For each candidate name, you MUST:
    - One-sentence verdict summary
    - Specific conflicts with real details
    - 3-5 paragraph analysis
-   - 2-4 ownability suggestions
 
 RESPOND ONLY with valid JSON (no markdown, no backticks):
 {
@@ -50,10 +49,7 @@ RESPOND ONLY with valid JSON (no markdown, no backticks):
       "conflicts_found": [
         { "name": "Brand", "category": "What they do", "url": "example.com", "severity": "HIGH", "notes": "Details" }
       ],
-      "analysis": "Multi-paragraph analysis.",
-      "ownability_suggestions": [
-        { "suggestion": "Alternative", "rationale": "Why" }
-      ]
+      "analysis": "Multi-paragraph analysis."
     }
   ]
 }`;
@@ -90,7 +86,7 @@ CRITICAL: Use web search for this name. Be ruthlessly honest. Return ONLY valid 
         'anthropic-version': '2023-06-01',
       },
       body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
+        model: 'claude-sonnet-4-6',
         max_tokens: 8000,
         system: SYSTEM_PROMPT,
         messages: [{ role: 'user', content: userPrompt }],
