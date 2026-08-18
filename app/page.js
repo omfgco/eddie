@@ -393,6 +393,13 @@ export default function Home() {
           {step === 'results' && (
             <button onClick={() => { setStep('input'); setResults([]); setError(null); }} style={{ padding: '6px 16px', background: 'transparent', border: '1px solid #242d38', borderRadius: 6, color: '#8b949e', fontSize: 13, cursor: 'pointer' }}>← New Search</button>
           )}
+          <button
+            onClick={async () => {
+              try { await fetch('/api/logout', { method: 'POST' }); } catch {}
+              window.location.href = '/login';
+            }}
+            style={{ padding: '6px 14px', background: 'transparent', border: '1px solid #242d38', borderRadius: 6, color: '#6e7681', fontSize: 12, cursor: 'pointer' }}
+          >Log out</button>
         </div>
       </div>
 
