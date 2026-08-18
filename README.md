@@ -58,14 +58,16 @@ Intended workflow:
 
 ## Verdicts
 
-| Verdict | Meaning |
-|---|---|
-| **PRESENT** | Put it in the deck. No caveats required. |
-| **PRESENT WITH FLAGS** | Show it — say the flags out loud before the client falls in love. Most common verdict. |
-| **INTERNAL ONLY** | Don't lead with it. Real problems with a real path. |
-| **DEAD** | Genuine blocker. |
+Eddie runs before anything is presented, so every verdict answers one question: does this name go in the deck?
 
-DEAD is reserved for true blocking hits. Crowded fields, geographic descriptiveness, adjacent-class marks, and unavailable domains never produce a DEAD verdict.
+| Verdict | API value | Meaning |
+|---|---|---|
+| **HELL YEAH!** | `PRESENT` | Clean. Lead with it. |
+| **YES, BUT** | `PRESENT_WITH_FLAGS` | In the deck — say the flags out loud when presenting. Most common verdict. |
+| **PROBABLY NOT** | `NOT_WORTH_IT` | No blocker, but the path is expensive enough it isn't worth a client's attention. Overridable if the shortlist is thin. |
+| **NOPE!** | `BLOCKED` | Genuine blocking hit. |
+
+NOPE! is reserved for true blocking hits. Crowded fields, geographic descriptiveness, adjacent-class marks, and unavailable domains never produce it.
 
 ## Scoring Dimensions
 

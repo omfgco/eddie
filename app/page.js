@@ -54,13 +54,19 @@ function weightedAvg(scores) {
   return weightSum ? (total / weightSum).toFixed(1) : null;
 }
 
+// Verdict display. `label` goes on the badge, `short` in the summary chips.
+// Eddie screens names BEFORE anything is presented, so the four tiers answer
+// one question: does this name go in the deck?
 const VERDICT_META = {
-  PRESENT: { color: '#22c55e', bg: '#16a34a', label: 'PRESENT ✓', blurb: 'Put it in the deck.' },
-  PRESENT_WITH_FLAGS: { color: '#eab308', bg: '#ca8a04', label: 'PRESENT WITH FLAGS ⚑', blurb: 'Show it — say the flags out loud first.' },
-  INTERNAL_ONLY: { color: '#f97316', bg: '#ea580c', label: 'INTERNAL ONLY ◐', blurb: "Don't lead with it." },
-  DEAD: { color: '#ef4444', bg: '#dc2626', label: 'DEAD ✕', blurb: 'Genuine blocker.' },
+  PRESENT:            { color: '#22c55e', bg: '#16a34a', label: 'HELL YEAH!',   short: 'HELL YEAH!',   blurb: 'Clean — lead with it.' },
+  PRESENT_WITH_FLAGS: { color: '#eab308', bg: '#ca8a04', label: 'YES, BUT',     short: 'YES, BUT',     blurb: 'In the deck — say the flags out loud.' },
+  NOT_WORTH_IT:       { color: '#f97316', bg: '#ea580c', label: 'PROBABLY NOT', short: 'PROBABLY NOT', blurb: 'Achievable, but not worth the fight.' },
+  BLOCKED:            { color: '#ef4444', bg: '#dc2626', label: 'NOPE!',        short: 'NOPE!',        blurb: 'Genuine blocker.' },
 };
-const vMeta = v => VERDICT_META[v] || { color: '#6b7280', bg: '#6b7280', label: v || '—', blurb: '' };
+
+// Legacy verdict values from reports run before the rename.
+const LEGACY_VERDICTS = { INTERNAL_ONLY: 'NOT_WORTH_IT', DEAD: 'BLOCKED', GO: 'PRESENT', CAUTION: 'PRESENT_WITH_FLAGS', STOP: 'BLOCKED' };
+const vMeta = v => VERDICT_META[v] || VERDICT_META[LEGACY_VERDICTS[v]] || { color: '#6b7280', bg: '#6b7280', label: v || '—', short: v || '—', blurb: '' };
 
 // ── Styles ──
 const s = {
@@ -361,12 +367,12 @@ export default function Home() {
         });
         const data = await res.json();
         if (data.error) {
-          allResults.push({ name: names[i], verdict: 'INTERNAL_ONLY', verdict_summary: `Analysis failed: ${data.error}`, scores: {}, flags: [], conflicts_found: [], analysis: '' });
+          allResults.push({ name: names[i], verdict: 'NOT_WORTH_IT', verdict_summary: `Analysis failed: ${data.error}`, scores: {}, flags: [], conflicts_found: [], analysis: '' });
         } else if (data.names?.[0]) {
           allResults.push(data.names[0]);
         }
       } catch (err) {
-        allResults.push({ name: names[i], verdict: 'INTERNAL_ONLY', verdict_summary: `Request failed: ${err.message}`, scores: {}, flags: [], conflicts_found: [], analysis: '' });
+        allResults.push({ name: names[i], verdict: 'NOT_WORTH_IT', verdict_summary: `Request failed: ${err.message}`, scores: {}, flags: [], conflicts_found: [], analysis: '' });
       }
       // Update results incrementally
       setResults([...allResults]);
@@ -450,7 +456,7 @@ export default function Home() {
                 const m = vMeta(n.verdict);
                 return (
                   <div key={n.name} style={{ padding: '8px 16px', background: `${m.color}12`, border: `1px solid ${m.color}40`, borderRadius: 8, fontSize: 14 }}>
-                    <span style={{ fontWeight: 800, color: m.color }}>{n.verdict?.replace(/_/g, ' ')}</span>
+                    <span style={{ fontWeight: 800, color: m.color }}>{m.short}</span>
                     <span style={{ color: '#8b949e', marginLeft: 8 }}>{n.name}</span>
                   </div>
                 );

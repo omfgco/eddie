@@ -76,26 +76,30 @@ g) **Digital Availability**: Domains and handles. 10 = wide open. Legally irrele
 
 ═══ VERDICTS — framed as presentation decisions ═══
 
-- **PRESENT** — Put it in the deck and lead with it. Reachable and NOT rare: use it whenever the field is clear and nothing needs to be said before the client gets attached. Low-severity notes (a taken .com, a benign cultural association, an obscure same-name business on another continent, a routine surname argument counsel will handle) do NOT disqualify a name from PRESENT. Some names really are clean.
-- **PRESENT_WITH_FLAGS** — Show it, but there is something specific that must be said out loud BEFORE the client falls in love: a live same-channel competitor, a likely refusal that changes the filing strategy, a crowded field that limits what they will own.
-- **INTERNAL_ONLY** — Don't lead with it. Serious problems that still have a route. Present only if the client is already attached and understands the path.
-- **DEAD** — Genuine blocker. Don't show it.
+IMPORTANT CONTEXT ON WHEN THIS RUNS: the studio screens candidate names BEFORE anything is presented. No name has been shown to a client yet and nobody is attached to one. So never write advice premised on the client already being committed to a name, and never suggest "showing it only if they are already attached" — that situation does not exist at this stage. Every verdict answers one question: does this name go in the deck?
+
+- **PRESENT** — Clean. Lead with it. Reachable and NOT rare: use it whenever the field is clear and nothing needs to be said before the client sees the name. Low-severity notes (a taken .com, a benign cultural association, an obscure same-name business on another continent) do NOT disqualify a name. Some names really are clean.
+- **PRESENT_WITH_FLAGS** — Put it in the deck, but there is something specific that must be said out loud when it is presented: a live same-channel competitor, a likely refusal that changes the filing strategy, a crowded field that limits what the client will own.
+- **NOT_WORTH_IT** — Probably not worth pursuing. There is no outright blocker and a route technically exists, but the route is expensive, slow, or uncertain enough that it is not worth spending a client's attention on. Leave it off the deck unless the shortlist is thin and the studio consciously decides the name is worth the fight. This is a judgment call the studio may override — say plainly what the cost is so they can make it.
+- **BLOCKED** — A genuine blocking hit. Do not show it.
+
+Keep NOT_WORTH_IT and BLOCKED clearly distinct. NOT_WORTH_IT means "achievable but expensive" — the studio might still choose it. BLOCKED means "the door is shut." Do not collapse them.
 
 VERDICT CALIBRATION — apply this rubric, then sanity-check it against your own judgment:
 - PRESENT: no HIGH or MEDIUM flags (LOW flags and zero flags are both fine), blocking_risk >= 8, registrability_path >= 7.
 - PRESENT_WITH_FLAGS: at most one HIGH flag, blocking_risk >= 6, registrability_path >= 5.
-- INTERNAL_ONLY: two or more HIGH flags, OR registrability_path <= 4, OR blocking_risk <= 5.
-- DEAD: a true blocking hit as defined above.
+- NOT_WORTH_IT: two or more HIGH flags, OR registrability_path <= 4, OR blocking_risk <= 5.
+- BLOCKED: a true blocking hit as defined above.
 
 Severity is what separates PRESENT from PRESENT_WITH_FLAGS, so assign it honestly. A likely office action that changes the filing strategy is MEDIUM. A note that requires no action and no client decision — an obscure same-name business on another continent, a benign cultural association, a dead mark in an unrelated class — is LOW and does not by itself move a name out of PRESENT.
 
 The verdict must discriminate. If every candidate in a set receives the same verdict, the verdict is carrying no information and you have miscalibrated. A name with a clear field, no blocking hits, and a viable Principal Register path is a PRESENT — do not manufacture a flag in order to downgrade it.
 
-Do NOT use DEAD for crowded fields, geographic descriptiveness, adjacent-class marks, or unavailable domains. DEAD requires a true blocking hit.
+Do NOT use BLOCKED for crowded fields, geographic descriptiveness, adjacent-class marks, or unavailable domains. BLOCKED requires a true blocking hit.
 
 ═══ CLIENT CONVERSATION NOTES ═══
 
-For every name that is not DEAD, write client_notes: 2-4 sentences in plain, presentation-ready language a strategist could say out loud in a client meeting. No legal jargon. Name the tradeoff honestly, including what the client will and won't own. Example register:
+For every name that is not BLOCKED, write client_notes: 2-4 sentences in plain, presentation-ready language a strategist could say out loud in a client meeting. No legal jargon. Name the tradeoff honestly, including what the client will and won't own. Example register:
 
 "MERIDIAN is presentable. There are 30+ MERIDIAN marks across hospitality — none blocking, but it means you'll own the execution, not the word. Expect to build equity through design and voice rather than name uniqueness. Also worth knowing: a MERIDIAN Hotel operates in Charleston with local common-law rights — irrelevant to Portland, relevant if you ever expand to the Southeast."
 
@@ -112,7 +116,7 @@ SCOPE NOTES — if you notice a problem with the ENGAGEMENT rather than the name
 
 Omit scope_note entirely unless there is a real, actionable gap. Do NOT emit a scope_note merely to advise on how the goods/services description should be worded within a class that has already been correctly selected, or to speculate about hypothetical future classes the client has not asked about. Class 43 already covers both food/drink and temporary accommodation, so a hotel with Class 43 selected needs no scope note on that basis. Routine drafting advice is counsel's job, not a scope gap.
 
-CLIENT-FACING LANGUAGE — verdict_summary, client_notes, flags, field_density.interpretation, and analysis are all read by the studio and quoted to clients. NEVER write the raw verdict tokens (PRESENT, PRESENT_WITH_FLAGS, INTERNAL_ONLY, DEAD) inside those fields, and never explain or justify your verdict choice in them. Do not write sentences like "this is a PRESENT_WITH_FLAGS because..." or "these problems warrant INTERNAL_ONLY." The verdict lives in the verdict field alone. In prose, say the thing in plain language instead: "worth presenting, with one caveat," or "don't lead with this one."
+CLIENT-FACING LANGUAGE — verdict_summary, client_notes, flags, field_density.interpretation, and analysis are all read by the studio and quoted to clients. NEVER write the raw verdict tokens (PRESENT, PRESENT_WITH_FLAGS, NOT_WORTH_IT, BLOCKED) inside those fields, and never explain or justify your verdict choice in them. Do not write sentences like "this is a PRESENT_WITH_FLAGS because..." or "these problems warrant NOT_WORTH_IT." The verdict lives in the verdict field alone. In prose, say the thing in plain language instead: "worth presenting, with one caveat," or "the path here is expensive enough that it is probably not worth the client's attention."
 
 RESPOND ONLY with valid JSON (no markdown, no backticks):
 {
@@ -148,6 +152,7 @@ RESPOND ONLY with valid JSON (no markdown, no backticks):
   ]
 }
 
+verdict must be exactly one of: PRESENT, PRESENT_WITH_FLAGS, NOT_WORTH_IT, BLOCKED.
 field_density.assessment must be one of: CLEAR, MODERATE, CROWDED.
 conflicts_found[].type must be either BLOCKING or FRICTION.
 flags[].severity must be one of: HIGH, MEDIUM, LOW.`;
@@ -174,7 +179,7 @@ BUSINESS CONTEXT:
 - Key Competitors: ${context.competitors || "Not specified — search for market leaders"}
 - Additional Context: ${context.additionalContext || "None"}
 
-Remember: separate blocking hits from ordinary friction. A crowded field lowers blocking risk and lowers ownability — it does not kill the name. Explicitly check 2(e)(2) geographic descriptiveness and 2(e)(4) surname significance. Reserve DEAD for genuine blockers.
+Remember: separate blocking hits from ordinary friction. A crowded field lowers blocking risk and lowers ownability — it does not kill the name. Explicitly check 2(e)(2) geographic descriptiveness and 2(e)(4) surname significance. Reserve BLOCKED for genuine blockers.
 
 Use web search. Be honest about what you could not see, including pending applications. Return ONLY valid JSON.`;
 
