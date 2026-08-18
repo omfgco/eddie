@@ -15,7 +15,7 @@ const NICE_CLASSES = [
   "33 - Alcoholic Beverages","34 - Tobacco","35 - Advertising & Business",
   "36 - Insurance & Finance","37 - Construction & Repair","38 - Telecommunications",
   "39 - Transportation & Storage","40 - Material Treatment","41 - Education & Entertainment",
-  "42 - Science & Technology","43 - Food Services","44 - Medical & Beauty Services",
+  "42 - Science & Technology","43 - Food, Drink & Accommodation","44 - Medical & Beauty Services",
   "45 - Legal & Security Services"
 ];
 
