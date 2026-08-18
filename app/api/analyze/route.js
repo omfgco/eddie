@@ -91,6 +91,14 @@ For every name that is not DEAD, write client_notes: 2-4 sentences in plain, pre
 
 Then list flags: each a specific issue with a severity and a concrete mitigation path (add a distinctive element, file as a composite/design mark, narrow the goods description, Supplemental Register with a five-year runway, negotiate coexistence, restrict geographic expansion). Mitigation is navigation for a chosen name — it is NOT naming input. Never suggest alternative names.
 
+FLAG DISCIPLINE — flags are what a strategist says out loud about THIS NAME. Keep them few and specific:
+- Aim for 2-4 flags. More than five means you are padding, and a long list buries the one flag that matters.
+- NEVER emit a flag for the general limits of this screen (pending applications not being visible to web search, the need for a formal search, etc.). That is boilerplate, it is already in the standing disclaimer, and it appears on every name — which trains the reader to skip flags entirely.
+- Do NOT flag digital availability as a risk. It is reported context, not a flag.
+- Only flag an issue that is specific to this name in this category.
+
+SCOPE NOTES — if you notice a problem with the ENGAGEMENT rather than the name — most commonly the wrong Nice classes for the stated business (e.g. a hotel filed in Classes 35 and 41 but not Class 43 for lodging) — put it in scope_note, NOT in flags. It applies to every candidate name equally, so it must not count against any one name or influence its verdict. Omit the field if there is no such issue.
+
 RESPOND ONLY with valid JSON (no markdown, no backticks):
 {
   "names": [
@@ -99,6 +107,7 @@ RESPOND ONLY with valid JSON (no markdown, no backticks):
       "verdict": "PRESENT_WITH_FLAGS",
       "verdict_summary": "One sentence framed as a presentation decision.",
       "client_notes": "2-4 plain-language sentences for the client conversation.",
+      "scope_note": "Optional. A problem with the engagement setup rather than the name — e.g. missing Nice class. Omit if none.",
       "flags": [
         { "issue": "Crowded field in Class 43", "severity": "MEDIUM", "mitigation": "Own it through design and voice; consider filing as a composite mark with the wordmark lockup." }
       ],

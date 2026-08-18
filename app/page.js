@@ -122,6 +122,13 @@ function NameCard({ result, context }) {
         <div style={{ padding: '16px 20px 20px' }}>
           <p style={{ margin: '0 0 20px', padding: '12px 16px', background: '#1a2230', borderRadius: 8, fontSize: 14, lineHeight: 1.65, fontStyle: 'italic', color: '#c9d1d9', borderLeft: `3px solid ${verdictBorder}` }}>{result.verdict_summary}</p>
 
+          {result.scope_note && (
+            <div style={{ marginBottom: 16, padding: '12px 16px', background: '#2a1f08', border: '1px solid #5c4514', borderRadius: 8, display: 'flex', gap: 10, alignItems: 'flex-start' }}>
+              <span style={{ fontFamily: 'monospace', fontSize: 9, fontWeight: 800, color: '#eab308', background: '#eab30818', padding: '2px 8px', borderRadius: 4, whiteSpace: 'nowrap', marginTop: 2 }}>SCOPE</span>
+              <div style={{ fontSize: 13.5, color: '#e6d5a8', lineHeight: 1.6 }}>{result.scope_note}</div>
+            </div>
+          )}
+
           {result.client_notes && (
             <div style={{ marginBottom: 20, padding: '16px 18px', background: '#12202e', border: '1px solid #1c3a5c', borderRadius: 10 }}>
               <h4 style={{ fontFamily: 'monospace', fontSize: 10, fontWeight: 800, letterSpacing: 1.8, textTransform: 'uppercase', color: '#58a6ff', margin: '0 0 10px' }}>Client Conversation Notes</h4>
